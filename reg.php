@@ -72,11 +72,11 @@ if(!empty($_POST['nickname']) && !empty($_POST['email']) && !empty($_POST['passw
                     <h1>Регистрация</h1><br>
                     <form action="reg.php" method="post" name="reg">
                         <p>
-                            <label>Ник<br><input class="input" name="nickname" size="32" type="text" value="nixasdfa"></label></p>
+                            <label>Ник<br><input class="input" name="nickname" size="32" type="text"></label></p>
                         <p>
-                            <label>E-mail<br><input class="input" name="email" size="32" type="email" value="123@list.ru"></label></p>
+                            <label>E-mail<br><input class="input" name="email" size="32" type="email"></label></p>
                         <p>
-                            <label>Пароль<br><input class="input" name="password" size="32" type="password" value="123"></label></p>
+                            <label>Пароль<br><input class="input" name="password" size="32" type="password"></label></p>
                         <p class="submit">
                             <input class="button" name= "register" type="submit" value="Зарегистрироваться"></p>
                         <p class="regtext">

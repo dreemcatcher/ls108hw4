@@ -29,37 +29,64 @@ include "menu.php";
                     <table width=100%  cellspacing="0" cellpadding="0" border="0">
                         <tr>
                             <?php
+                            if (!empty($_POST['updphotoname'])) {
+                                echo "Запрос на смену имени получен";
+                                try {
+                                    $dbh = new PDO('mysql:host=localhost;dbname=dreamcatcher', _USER_NAME_, _DB_PASSWORD);
+                                    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-//                            if (!empty($_GET["name"])&&!empty($_GET["age"]))
-//                            { echo " Получены новые вводные: имя - ".$_GET["name"].", возраст - ".$_GET["age"]." лет";}
-//                            else { echo "Переменные не дошли. Проверьте все еще раз."; }
+                                    $phnumber=htmlspecialchars($_POST['phnumber']);
+                                    $ph_name=htmlspecialchars($_POST['updphotoname']);
 
-                            $phnumber=htmlspecialchars($_GET['phnumber']);
+                                    //UPDATE `dreamcatcher`.`Photos` SET `photo_name` = 'asdfafwe' WHERE `photos`.`id` = 65;
+                                    $sql ="UPDATE Photos SET photo_name = :photo_name WHERE id = :id";
+                                    $stmt = $dbh->prepare($sql);
 
-                            $filename="photos/".$phnumber;
-                            if (file_exists($phnumber)) {
-                                unlink($filename);
-                            }else{
+                                    $stmt->bindValue(':photo_name', $ph_name);
+                                    $stmt->bindValue(':id', $phnumber);
+
+                                    $result = $stmt->execute();
+
+                                    $dbh = null;
+
+                                    echo "<script language='JavaScript'>";
+                                    echo "window.location.href ='photoedit.php?phnumber=".$phnumber."'</script>";
+                                } catch (PDOException $e) {
+                                    print "Error!: " . $e->getMessage() . "<br/>";
+                                    die();
+                                }
                             }
-                            echo "Фото было удалено!";
+                            else{
+                                $phnumber=htmlspecialchars($_GET['phnumber']);
+                                $filename="photos/".$phnumber;
+                                if (file_exists($phnumber)) {// this cod delete img
+                                    unlink($filename);
+                                }else{
 
-                           // $phnumber=$_GET['phnumber'];
+                                }
+                                echo "Фото было удалено!";
 
-                            $userid=$_SESSION["user_id"];
-                            $dbh = new PDO('mysql:host=localhost;dbname=dreamcatcher', _USER_NAME_, _DB_PASSWORD);
-                            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $userid=$_SESSION["user_id"];
+                                $dbh = new PDO('mysql:host=localhost;dbname=dreamcatcher', _USER_NAME_, _DB_PASSWORD);
+                                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                            $sql = "SELECT * FROM `Photos` WHERE id = :photo_name";
-                            $stmt = $dbh->prepare($sql);
-                            $stmt->bindValue(':photo_name', $phnumber);
-                            $stmt->execute();
-                            $row_count = $stmt->rowCount();
+                                $sql = "SELECT * FROM `Photos` WHERE id = :photo_name";
+                                $stmt = $dbh->prepare($sql);
+                                $stmt->bindValue(':photo_name', $phnumber);
+                                $stmt->execute();
+                                $row_count = $stmt->rowCount();
 
-                            while ($row = $stmt->fetch()) {
+                                while ($row = $stmt->fetch()) {
                                     echo "<td align='center'>";
                                     echo "<br><img src=photos/" . $row['phname'] . " width='800'><br>". $row['photo_name'];
-                                    echo "<a href='del.php?phn=".$row['phname']."'>Удалить</a>";
+                                    echo "&nbsp&nbsp&nbsp<a href='del.php?phn=".$row['phname']."'>Удалить</a>";
+
+                                    echo "<form action='photoedit.php' method='post' name='updphoto'>
+                                    <br><input class='input' name='updphotoname' size='32'' type='text'  placeholder='".$row['photo_name']."'>
+                                    <input type='hidden' name='phnumber' value='".$phnumber."'>
+                                    <p><input class='button' name='updphotobutton' type='submit' value='Отправить'></p></form>";
                                     echo "</td>";
+                                }
                             }
                             ?>
                         </tr>

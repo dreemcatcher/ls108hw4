@@ -1,0 +1,91 @@
+body,h1,h2,h3,p,quote,small,form,input,ul,li,ol,label{
+	/* The reset rules */
+	margin:0px;
+	padding:0px;
+}
+
+body{
+	font-size:15px;
+	font-family:Arial, Helvetica, sans-serif;
+	width: 100%;
+}
+
+h1{
+	font-size:28px;
+	font-weight:bold;
+	font-family:"Trebuchet MS",Arial, Helvetica, sans-serif;
+	letter-spacing:1px;
+}
+
+h2{
+	font-family:"Arial Narrow",Arial,Helvetica,sans-serif;
+	font-size:10px;
+	font-weight:normal;
+	letter-spacing:1px;
+	padding-left:2px;
+	text-transform:uppercase;
+	white-space:nowrap;
+	margin-top:4px;
+	color:#888888;
+}
+
+a, a:visited {
+	color:#00BBFF;
+	text-decoration:none;
+	outline:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+
+.shadow {
+	background: #F5F5F5;
+	box-shadow: 0 0 15px rgba(0,0,0,0.5);
+	padding: 10px;
+	border-radius: 10px;
+}
+
+#login{
+	top: 100px;
+	width: 25%;
+	padding: 18px 6% 50px 6%;
+	margin: auto;
+	background: rgb(247, 247, 247);
+	border: 1px solid rgba(147, 184, 189,0.8);
+	box-shadow:
+			0pt 2px 5px rgba(105, 108, 109,  0.7),
+			0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	border-radius: 5px;
+}
+#login{
+	z-index: 22;
+}
+
+/**** advanced input styling ****/
+/* placeholder */
+::-webkit-input-placeholder  {
+	color: rgb(190, 188, 188);
+	font-style: italic;
+}
+input:-moz-placeholder,
+textarea:-moz-placeholder{
+	color: rgb(190, 188, 188);
+	font-style: italic;
+}
+input {
+	outline: none;
+}
+
+.menu{
+	top: 100px;
+	width: 57%;
+	padding: 18px 6% 18px 6%;
+	margin: auto;
+	background: rgb(247, 247, 247);
+	border: 1px solid rgba(147, 184, 189,0.8);
+	box-shadow:
+			0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	border-radius: 5px;
+}
